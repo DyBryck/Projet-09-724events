@@ -3,6 +3,7 @@ import PeopleCard from "../../components/PeopleCard";
 import ServiceCard from "../../components/ServiceCard";
 import Menu from "../../containers/Menu";
 
+import { useEffect, useState } from "react";
 import Icon from "../../components/Icon";
 import Logo from "../../components/Logo";
 import EventList from "../../containers/Events";
@@ -13,7 +14,14 @@ import { useData } from "../../contexts/DataContext";
 import "./style.scss";
 
 const Page = () => {
-  const { last } = useData();
+  const { data } = useData();
+  const [last, setLast] = useState(null);
+  useEffect(() => {
+    if (data) {
+      setLast(data.events[data.events.length - 1]);
+    }
+  }, [data]);
+
   return (
     <>
       <header>
@@ -114,13 +122,15 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
-          <EventCard
-            imageSrc={last?.cover}
-            title={last?.title}
-            date={new Date(last?.date)}
-            small
-            label="boom"
-          />
+          {last && (
+            <EventCard
+              imageSrc={last.cover}
+              title={last.title}
+              date={new Date(last.date)}
+              small
+              label="boom"
+            />
+          )}
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>

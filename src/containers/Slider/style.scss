@@ -11,6 +11,10 @@
     top: 0;
     position: absolute;
     transition: opacity 1s;
+
+    & img {
+      height: 100%;
+    }
     &--hide {
       opacity: 0;
     }

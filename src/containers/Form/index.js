@@ -25,7 +25,7 @@ const Form = ({ onSuccess, onError }) => {
         onError(err);
       }
     },
-    [onSuccess, onError]
+    [onSuccess, onError],
   );
   return (
     <form onSubmit={sendContact}>
